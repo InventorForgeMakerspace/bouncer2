@@ -7,6 +7,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
 var routes = require('./routes/index');
+var accesscontrol = require('./routes/accesscontrol');
 var app = express();
 
 // view engine setup
@@ -22,6 +23,9 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
+
+// Legacy access control script - for backwards compatibility
+app.use('/accesscontrol', accesscontrol);
 
 // catch 404 and forward to error handler
 app.use((req: Request, res: Response, next: Function) => {
